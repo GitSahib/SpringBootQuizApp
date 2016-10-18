@@ -62,8 +62,7 @@ public class UserController {
 		return "login";
 	}
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String registration(Model model) {
-		model.addAttribute("userForm", new User());
+	public String registration() {
 		return "redirect:login#toregister";
 	}
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -82,6 +81,8 @@ public class UserController {
 		Profile profile = userForm.getProfile();
 		userForm.setProfile(null);
 		userService.save(userForm);
+		
+		
 		profile.setUser(userForm);
 		profileService.save(profile);		
 		securityService.autologin(userForm.getUsername(), userForm.getPassword());

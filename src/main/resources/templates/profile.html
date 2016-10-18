@@ -7,9 +7,9 @@
 	th:href="@{css/animate-custom.css}" />
 <link href="../static/css/login-one.css" rel="stylesheet"
 	th:href="@{css/login-one.css}" />
-<link href="../static/css/bootstrap.min.css" rel="stylesheet"
-	th:href="@{css/bootstrap/css/bootstrap.min.css}" />
-<script src="../static/js/jquery.min.js" th:src="@{js/jquery.min.js}"></script>
+<link href="vendor/css/bootstrap.min.css" rel="stylesheet"
+	th:href="@{vendor/bootstrap/css/bootstrap.min.css}" />
+<script src="vendor/js/jquery.min.js" th:src="@{js/jquery.min.js}"></script>
 
 </head>
 <body>
@@ -55,6 +55,9 @@
 						<fieldset>
 							<legend th:text="#{legend.change.password}">Change
 								Password</legend>
+							<span th:if="${passwordChanged}" class="label label-success">
+								Your Password Was Changed Successfully.
+							</span>
 							<div class="form-group">
 								<input class="form-control" id="oldPassword"
 									th:field="*{user.oldPassword}" type="password"

@@ -35,13 +35,13 @@ public class ProfileValidator implements Validator {
 			errors.rejectValue("phoneNumber", "errors.invalid.phone.number");
 		}
 		if (!profile.getUser().getPassword().isEmpty()) {
-			if (!userService.authenticate(profile.getUser().getOldPassword())) {
+			if (profile.getUser().getOldPassword().length() < 7 || !userService.authenticate(profile.getUser().getOldPassword())) {
 				errors.rejectValue("user.oldPassword", "errors.invalid.old.password");
 			}
-			if (!profile.getUser().getPasswordConfirm().equals(profile.getUser().getPassword())) {
+			if (profile.getUser().getPasswordConfirm() == null || !profile.getUser().getPasswordConfirm().equals(profile.getUser().getPassword())) {
 				errors.rejectValue("user.passwordConfirm", "errors.passwords.doesnot.match");
 			}
-			if (profile.getUser().getPassword().length() < 8 || profile.getUser().getPassword().length() > 32) {
+			if (profile.getUser().getPassword()==null || profile.getUser().getPassword().length() < 8 || profile.getUser().getPassword().length() > 32) {
 				errors.rejectValue("user.password", "errors.password.size.less.than.eight");
 			}
 		}

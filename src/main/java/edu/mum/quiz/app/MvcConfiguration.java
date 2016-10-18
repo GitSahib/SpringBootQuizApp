@@ -18,6 +18,8 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import edu.mum.quiz.app.aop.ExecuteTimeInterceptor;
+import edu.mum.quiz.app.aop.MaintenanceInterceptor;
 
 @Configuration
 @EnableAutoConfiguration
@@ -32,6 +34,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/404.html").setViewName("404");
+		registry.addViewController("/error-custom.html").setViewName("error-custom");
 	}
 
 	@Override
@@ -40,7 +43,20 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 		validator.setValidationMessageSource(messageSource);
 		return validator;
 	}
-
+	
+	@Bean
+	public MaintenanceInterceptor maintenanceInterceptor() {
+		MaintenanceInterceptor interceptor = new MaintenanceInterceptor();
+		interceptor.setMaintenanceStartTime(23);
+		interceptor.setMaintenanceEndTime(24);
+		interceptor.setMaintenanceMapping("maintenance");
+		return interceptor;
+	}
+	@Bean
+	public ExecuteTimeInterceptor executeTimeInterceptor() {
+		ExecuteTimeInterceptor interceptor = new ExecuteTimeInterceptor();
+		return interceptor;
+	}
 	@Bean
 	public LocaleResolver localeResolver() {
 		CookieLocaleResolver resolver = new CookieLocaleResolver();
@@ -49,12 +65,14 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 		resolver.setCookieMaxAge(4800);
 		return resolver;
 	}
-
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		LocaleChangeInterceptor interceptor = new LocaleChangeInterceptor();
 		interceptor.setParamName("lang");
 		registry.addInterceptor(interceptor);
+		registry.addInterceptor(executeTimeInterceptor());
+		registry.addInterceptor(maintenanceInterceptor());
 	}
+	
 
 }

@@ -15,7 +15,8 @@
 
 </head>
 <body>
-	<section>
+	<section>	
+		<span th:text="${'Execution Time:'+executeTime + 'ms'}"></span>
 		<div id="container_login">
 			<ul style="padding:0px;list-style-type:none;">
 				<li th:each="color:*{list}" th:style="${'background:' + color}" th:text="${color}"></li>

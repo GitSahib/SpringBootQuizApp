@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.mum.quiz.domain.Profile;
 import edu.mum.quiz.domain.User;
@@ -39,7 +40,7 @@ public class ProfileController {
 
 	@RequestMapping(value = "/profile", method = RequestMethod.POST)
 	public String profileinfo(@ModelAttribute("profileForm") Profile profileForm, BindingResult bindingResult,
-			Model model) {
+			Model model,RedirectAttributes rda) {
 		profileValidator.validate(profileForm, bindingResult);
 		if (bindingResult.hasErrors()) {
 			log.error("User Profile Form Invalid");
@@ -50,6 +51,7 @@ public class ProfileController {
 		if(!profileForm.getUser().getPassword().isEmpty())
 		{
 			userService.changePassword(user.getUsername(), profileForm.getUser().getPassword());
+			rda.addFlashAttribute("passwordChanged",true);
 		}
 		profileService.updateUserProfile(user,profileForm);
 		

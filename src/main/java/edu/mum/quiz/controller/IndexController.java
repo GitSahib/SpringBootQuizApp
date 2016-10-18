@@ -27,9 +27,9 @@ public class IndexController {
     public String about(Model model) {
           return "about";
     }
-    @RequestMapping(value = {"/error"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"error"}, method = RequestMethod.GET)
     public String error(Model model) {
-          return "error";
+          return "error-custom";
     }
     @RequestMapping(value = {"/contact", "/contact.html","contact.jsp"}, method = RequestMethod.GET)
     public String contact(Model model) {
