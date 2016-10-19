@@ -51,19 +51,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
 	public User getLoggedInUser() {
-		try 
-		{
+		try {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-			UserDetails userDetails = auth==null?null:(UserDetails) auth.getPrincipal();
-			String userName = userDetails==null?"guest":userDetails.getUsername();
+			UserDetails userDetails = auth == null ? null : (UserDetails) auth.getPrincipal();
+			String userName = userDetails == null ? "guest" : userDetails.getUsername();
 			return findByUsername(userName);
 		} catch (ClassCastException ex) {
 			return null;
-		}
-		catch(Exception ex)
-		{
+		} catch (Exception ex) {
 			return null;
 		}
 	}

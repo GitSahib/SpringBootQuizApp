@@ -1,15 +1,11 @@
 package edu.mum.quiz.controller;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.nio.file.Paths;
+import java.util.Arrays;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -40,9 +36,6 @@ public class ProfileController {
 	ProfileService profileService;
 	@Autowired
 	ProfileValidator profileValidator;
-	@Autowired
-	private Environment env;
-
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public String profileinfo(Model model, HttpServletRequest request) {
 		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -81,24 +74,15 @@ public class ProfileController {
 	@ResponseBody
 	public ResponseEntity<?> uploadFile(@RequestParam("uploadphoto") MultipartFile uploadfile) {
 
-		try {
-			// Get the filename and build the local file path
-			
-			String filename= userService.getLoggedInUser().getId().toString()+".png";
-			
-			String directory = env.getProperty("user.profile.uploadedImages");
-			String filepath = Paths.get(directory, filename).toString();
-			
-			// Save the file locally
-			BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(new File(filepath)));
-			stream.write(uploadfile.getBytes());
-			stream.close();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		User user = userService.getLoggedInUser();
+		String contentType = uploadfile.getContentType();
+		String[] allowedTypes = { "image/png", "image/jpg", "image/gif", "image/jpeg" };
+		if (Arrays.asList(allowedTypes).contains(contentType)) {
+			ResponseEntity<Object> response = profileService.saveImage(uploadfile, user);
+			return response;
+		} else {
+			return new ResponseEntity<>("{\"Message\":\"Wrong File Type\"}", HttpStatus.BAD_REQUEST);
 		}
-
-		return new ResponseEntity<>(HttpStatus.OK);
 	} // method uploadFile
 
 }

@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.google.common.base.Throwables;
-
+@EnableWebMvc
 @ControllerAdvice
 class ExceptionHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger("ErrorLog");

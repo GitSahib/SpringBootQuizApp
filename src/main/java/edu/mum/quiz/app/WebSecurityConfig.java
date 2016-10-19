@@ -36,6 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .antMatchers("/student**").hasAuthority("Student")
         .antMatchers("/student/**").hasAuthority("Student")
         .antMatchers("/profile**").authenticated()
+        .antMatchers("profile/uploadPhoto").authenticated()
 		.antMatchers("/index**").authenticated()
 		.antMatchers("/").authenticated()
 		

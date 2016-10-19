@@ -1,9 +1,14 @@
 
 package edu.mum.quiz.domain;
 
+import java.io.UnsupportedEncodingException;
+
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.apache.tomcat.util.codec.binary.Base64;
 
 @Entity
 @Table(name = "user_profile")
@@ -16,6 +21,8 @@ public class Profile extends Model {
 	private String firstName;
     private String lastName;
     private String phoneNumber;
+    @Lob
+    private byte[] image;
     @OneToOne
     private User user;
     //region -Getters and Setters
@@ -74,6 +81,26 @@ public class Profile extends Model {
 	public String toString() {
 		return "Profile [firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber=" + phoneNumber + ", user="
 				+ user + "]";
+	}
+	/**
+	 * @return the image
+	 * @throws UnsupportedEncodingException 
+	 */
+	public String getImage() throws UnsupportedEncodingException {
+		if(this.image == null)
+		{
+			return "";
+		}
+		byte[] encodeBase64 = Base64.encodeBase64(this.image);
+		String base64Encoded = new String(encodeBase64, "UTF-8");
+		
+		return base64Encoded;
+	}
+	/**
+	 * @param image the image to set
+	 */
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
    
 	//endregion

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-<div th:replace="partials/head::head">&nbsp;</div>
+<div th:replace="partials/backend/head::head">&nbsp;</div>
 
 <body class="nav-md">
 	<div class="container body">
@@ -16,24 +16,24 @@
 
 					<div class="clearfix"></div>
 
-					<div th:replace="partials/profilemenu::menu">&nbsp;</div>
+					<div th:replace="partials/backend/profilemenu::menu">&nbsp;</div>
 
 					<br />
 
-					<div th:replace="partials/leftmenu :: leftmenu">&nbsp;</div>
-					<div th:replace="partials/desktopbuttons::buttons">&nbsp;</div>
+					<div th:replace="partials/backend/leftmenu :: leftmenu">&nbsp;</div>
+					<div th:replace="partials/backend/desktopbuttons::buttons">&nbsp;</div>
 				</div>
 			</div>
 
-			<div th:replace="partials/topmenu::topmenu">&nbsp;</div>
+			<div th:replace="partials/backend/topmenu::topmenu">&nbsp;</div>
 
 			<!-- page content -->
 			<div class="right_col" role="main">Main Content goes here</div>
 			<!-- /page content -->
 
-			<div th:replace="partials/footer::footer">&nbsp;</div>
+			<div th:replace="partials/backend/footer::footer">&nbsp;</div>
 		</div>
 	</div>
-	<div th:replace="partials/jscripts::jscripts">&nbsp;</div>
+	<div th:replace="partials/backend/jscripts::jscripts">&nbsp;</div>
 </body>
 </html>
