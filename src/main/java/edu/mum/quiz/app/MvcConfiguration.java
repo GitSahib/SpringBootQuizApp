@@ -18,6 +18,7 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+
 import edu.mum.quiz.app.aop.ExecuteTimeInterceptor;
 import edu.mum.quiz.app.aop.MaintenanceInterceptor;
 
@@ -34,7 +35,6 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/404.html").setViewName("404");
-		registry.addViewController("/error-custom.html").setViewName("error-custom");
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package edu.mum.quiz.service.security.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -49,6 +50,24 @@ public class UserServiceImpl implements UserService {
 
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public User getLoggedInUser() {
+		try 
+		{
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			UserDetails userDetails = auth==null?null:(UserDetails) auth.getPrincipal();
+			String userName = userDetails==null?"guest":userDetails.getUsername();
+			return findByUsername(userName);
+		} catch (ClassCastException ex) {
+			return null;
+		}
+		catch(Exception ex)
+		{
+			return null;
+		}
+	}
+
 	@Transactional
 	@Override
 	public void updateUser(String username, User user) {
@@ -73,12 +92,9 @@ public class UserServiceImpl implements UserService {
 					userDetails, password, userDetails.getAuthorities());
 			authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 			return usernamePasswordAuthenticationToken.isAuthenticated();
-		} 
-		catch (AuthenticationException ex) {
+		} catch (AuthenticationException ex) {
 			return false;
-		}
-		catch (Exception ex)
-		{
+		} catch (Exception ex) {
 			return false;
 		}
 

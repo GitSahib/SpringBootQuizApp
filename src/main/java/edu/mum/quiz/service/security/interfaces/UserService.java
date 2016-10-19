@@ -17,4 +17,6 @@ public interface UserService {
 	boolean userExists(String username);
 
 	boolean authenticate(String password);
+
+	User getLoggedInUser();
 }

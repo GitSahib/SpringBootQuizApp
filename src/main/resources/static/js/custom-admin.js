@@ -59,9 +59,11 @@ $(document).ready(function() {
     $MENU_TOGGLE.on('click', function() {
         if ($BODY.hasClass('nav-md')) {
             $SIDEBAR_MENU.find('li.active ul').hide();
+            $(".site_title img").attr("style","width:50px;height:50px;");
             $SIDEBAR_MENU.find('li.active').addClass('active-sm').removeClass('active');
         } else {
             $SIDEBAR_MENU.find('li.active-sm ul').show();
+            $(".site_title img").attr("style","");
             $SIDEBAR_MENU.find('li.active-sm').addClass('active').removeClass('active-sm');
         }
 

@@ -100,7 +100,7 @@ public class UserController {
 
 	@RequestMapping(value = "/accessdenied", method = RequestMethod.GET)
 	public String accessdenied() {
-		return "accessdenied";
+		return "error/accessDenied";
 	}
 
 	

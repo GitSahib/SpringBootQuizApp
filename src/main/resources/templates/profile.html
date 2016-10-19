@@ -3,13 +3,13 @@
 <head>
 <title th:text="#{title.login.page}"></title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link href="../static/css/animate-custom.css" rel="stylesheet"
+<link href="css/animate-custom.css" rel="stylesheet"
 	th:href="@{css/animate-custom.css}" />
-<link href="../static/css/login-one.css" rel="stylesheet"
+<link href="css/login-one.css" rel="stylesheet"
 	th:href="@{css/login-one.css}" />
 <link href="vendor/css/bootstrap.min.css" rel="stylesheet"
 	th:href="@{vendor/bootstrap/css/bootstrap.min.css}" />
-<script src="vendor/js/jquery.min.js" th:src="@{js/jquery.min.js}"></script>
+<script src="vendor/jquery/jquery.min.js" th:src="@{vendor/jquery/jquery.min.js}"></script>
 
 </head>
 <body>
@@ -56,8 +56,7 @@
 							<legend th:text="#{legend.change.password}">Change
 								Password</legend>
 							<span th:if="${passwordChanged}" class="label label-success">
-								Your Password Was Changed Successfully.
-							</span>
+								Your Password Was Changed Successfully. </span>
 							<div class="form-group">
 								<input class="form-control" id="oldPassword"
 									th:field="*{user.oldPassword}" type="password"
@@ -82,6 +81,7 @@
 									class="label label-danger" th:errors="*{user.passwordConfirm}">Passwords
 									Does not match</p>
 							</div>
+
 						</fieldset>
 						<div class="form-group right">
 							<input class="btn btn-success btn-lg" type="submit"
@@ -89,9 +89,44 @@
 						</div>
 
 					</form>
+					<form id="upload-photo-form">
+						<div class="form-group">
+							<label for="upload-photo-input">Upload your photo]:</label> <input
+								id="upload-photo-input" class="form-control" type="file"
+								name="uploadphoto" accept="*" /> <br /> <span
+								id="upload-photo-message"></span>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
 	</section>
+	<script>
+		$(function() {
+			$("#upload-photo-input").on("change", uploadFile);
+		});
+		function uploadFile() {
+			$.ajax({
+				url : "profile/uploadPhoto",
+				type : "POST",
+				data : new FormData($("#upload-photo-form")[0]),
+				enctype : 'multipart/form-data',
+				processData : false,
+				contentType : false,
+				cache : false,
+				success : function() {
+					// Handle upload success
+					$("#upload-photo-message").text(
+							"Photo succesfully uploaded");
+				},
+				error : function() {
+					// Handle upload error
+					$("#upload-photo-message")
+							.text(
+									"Photo not uploaded (perhaps it's too much big)");
+				}
+			});
+		} // function uploadFile
+	</script>
 </body>
 </html>

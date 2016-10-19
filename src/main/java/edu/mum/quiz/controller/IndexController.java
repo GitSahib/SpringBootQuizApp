@@ -21,15 +21,16 @@ public class IndexController {
 	ContactValidator contactValidator;
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String home(Model model) {
+    	
     	return "index";
     }
     @RequestMapping(value = {"/about"}, method = RequestMethod.GET)
     public String about(Model model) {
           return "about";
     }
-    @RequestMapping(value = {"error"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/error-custom"}, method = RequestMethod.GET)
     public String error(Model model) {
-          return "error-custom";
+          return "error";
     }
     @RequestMapping(value = {"/contact", "/contact.html","contact.jsp"}, method = RequestMethod.GET)
     public String contact(Model model) {
