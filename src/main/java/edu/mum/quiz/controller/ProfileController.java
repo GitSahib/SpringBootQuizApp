@@ -24,14 +24,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import edu.mum.quiz.domain.Profile;
 import edu.mum.quiz.domain.User;
 import edu.mum.quiz.service.security.interfaces.ProfileService;
-import edu.mum.quiz.service.security.interfaces.UserService;
 import edu.mum.quiz.service.validator.impl.ProfileValidator;
 
 @Controller
-public class ProfileController {
+public class ProfileController  extends MEMSController {
+	protected ProfileController() {
+		super("Profile");
+		// TODO Auto-generated constructor stub
+	}
+
 	Logger log = Logger.getLogger(getClass());
-	@Autowired
-	UserService userService;
 	@Autowired
 	ProfileService profileService;
 	@Autowired

@@ -1,20 +1,20 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<title th:text="#{title.login.page}"></title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<div th:replace="partials/frontend/head::head"></div>
+
+<link href="vendor/font-awesome/css/font-awesome.css" rel="stylesheet"
+	th:href="@{vendor/font-awesome/css/font-awesome.css}" />
+<meta name="_csrf" th:content="${_csrf.token}" />
+<!-- default header name is X-CSRF-TOKEN -->
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
 <link href="../static/css/animate-custom.css" rel="stylesheet"
 	th:href="@{css/animate-custom.css}" />
 <link href="../static/css/login-one.css" rel="stylesheet"
 	th:href="@{css/login-one.css}" />
 <link href="../static/css/login-two.css" rel="stylesheet"
 	th:href="@{css/login-two.css}" />
-<link href="vendor/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet" />
-<script src="vendor/jquery/jquery.min.js"></script>
-<title th:text="#{title.login.page}"></title>
-</head>
-<body>
+<body id="page-top login">
+	<div th:replace="partials/frontend/topmenu::menu"></div>
 	<section>
 		<div id="container_login">
 			<!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
@@ -23,7 +23,7 @@
 			<div class="col-md-3"></div>
 			<div id="wrapper" class="col-md-6">
 				<div id="login" class="animate form">
-					<form class="panel panel-success" method="post"
+					<form class="panel panel-primary" method="post"
 						th:action="@{/login}" th:object="${userForm}" autocomplete="on">
 						<div class="panel-heading">
 							<h1 class="panel-title" th:text="#{heading.login}"></h1>
@@ -50,7 +50,7 @@
 									th:text="#{label.keep.me.login}"></label>
 							</p>
 							<div class="form-group full">
-								<input class="btn btn-success" type="submit"
+								<input class="btn btn-primary" type="submit"
 									th:value="#{button.login}" />
 							</div>
 							<p class="change_link">
@@ -64,7 +64,7 @@
 				</div>
 
 				<div id="register" class="animate form">
-					<form class="panel panel-success" method="post"
+					<form class="panel panel-primary" method="post"
 						th:action="@{/register}" th:object="${userForm}" autocomplete="on">
 						<div class="panel-heading">
 							<h1 class="panel-title" th:text="#{heading.signup}">Sign up</h1>
@@ -120,7 +120,7 @@
 									Does not match</p>
 							</div>
 							<div class="form-group full">
-								<input class="btn btn-success" type="submit"
+								<input class="btn btn-primary" type="submit"
 									th:value="#{button.signup}" />
 							</div>
 							<p class="change_link">
@@ -138,5 +138,6 @@
 			</div>
 		</div>
 	</section>
+	<div th:replace="partials/frontend/scripts::scripts"></div>
 </body>
 </html>

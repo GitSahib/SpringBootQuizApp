@@ -2,8 +2,8 @@
 <!-- menu profile quick info -->
 <div class="profile" th:fragment="menu">
 	<div class="profile_pic">
-		<img th:src="${user.profile.image?'users/userimages/'+user.id+'.png':'users/userimages/avatar.png'}"
-						th:alt="${user.profile.image?user.profile.firstName:'avatar'}" class="img-circle profile_img">
+		<img th:src="${user.profile.image != '' ?'data:image/jpeg;base64,'+user.profile.image:'users/userimages/avatar.png'}"
+						th:alt="${user.profile.image != '' ? user.profile.firstName:'avatar'}" class="img-circle profile_img">
 	</div>
 	<div class="profile_info">
 		<span>Welcome,</span>

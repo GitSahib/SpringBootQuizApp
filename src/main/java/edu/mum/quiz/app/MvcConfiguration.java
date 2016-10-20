@@ -53,8 +53,8 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 	@Bean
 	public MaintenanceInterceptor maintenanceInterceptor() {
 		MaintenanceInterceptor interceptor = new MaintenanceInterceptor();
-		interceptor.setMaintenanceStartTime(23);
-		interceptor.setMaintenanceEndTime(24);
+		interceptor.setMaintenanceStartTime(12);
+		interceptor.setMaintenanceEndTime(13);
 		interceptor.setMaintenanceMapping("maintenance");
 		return interceptor;
 	}

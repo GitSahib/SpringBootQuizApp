@@ -1,23 +1,14 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-<title th:text="#{title.login.page}"></title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link href="/css/animate-custom.css" rel="stylesheet"
-	th:href="@{css/animate-custom.css}" />
-<link href="/css/profile.css" rel="stylesheet"
-	th:href="@{css/profile.css}" />
+<div th:replace="partials/frontend/head::head"></div>
+
 <link href="vendor/font-awesome/css/font-awesome.css" rel="stylesheet"
 	th:href="@{vendor/font-awesome/css/font-awesome.css}" />
-<link href="/vendor/css/bootstrap.min.css" rel="stylesheet"
-	th:href="@{vendor/bootstrap/css/bootstrap.min.css}" />
-<script src="/vendor/jquery/jquery.min.js"
-	th:src="@{vendor/jquery/jquery.min.js}"></script>
 <meta name="_csrf" th:content="${_csrf.token}" />
-<!-- default header name is X-CSRF-TOKEN -->
-<meta name="_csrf_header" th:content="${_csrf.headerName}" />
-</head>
-<body>
+		<!-- default header name is X-CSRF-TOKEN -->
+		<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+<body id="page-top profile">
+	<div th:replace="partials/frontend/topmenu::menu"></div>
 	<section>
 		<div id="container_profile">
 			<!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
@@ -25,7 +16,7 @@
 				id="tologin"></a>
 			<div class="col-md-3"></div>
 			<div id="wrapper" class="col-md-6">
-				<div id="profile" class="animate form panel panel-success">
+				<div id="profile" class="animate form panel panel-primary">
 					<div class="panel-heading">
 						<h1 class="panel-title">Profile</h1>
 					</div>
@@ -126,7 +117,7 @@
 							</fieldset>
 							
 							<div class="form-group full">
-								<input class="btn btn-success" type="submit"
+								<input class="btn btn-primary" type="submit"
 									th:value="#{button.save.profile.info}" />
 							</div>
 							</div>
@@ -137,6 +128,7 @@
 			</div>
 		</div>
 	</section>
+	<div th:replace="partials/frontend/scripts::scripts"></div>
 	<script>
 		$(function() {
 			$("#message-detail-trigger").on("click", function() {

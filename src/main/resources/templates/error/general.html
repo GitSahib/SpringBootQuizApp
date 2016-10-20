@@ -12,10 +12,10 @@
 <body>
 	<div class="container">
 		<div
-			th:replace="partials/alert :: alert (type='danger', message=${errorMessage})">Error:
+			th:replace="partials/backend/alert :: alert (type='danger', message=${errorMessage})">Error:
 			Error</div>
-		<div th:replace="partials/alert :: alert (type='info', message=${stackTrace})">Stack</div>
-		<div th:include="partials/footer :: footer">&copy; 2016 The	MEMS</div>
+		<div th:replace="partials/backend/alert :: alert (type='info', message=${stackTrace})">Stack</div>
+		<div th:include="partials/backend/footer :: footer">&copy; 2016 The	MEMS</div>
 	</div>
 
 </body>

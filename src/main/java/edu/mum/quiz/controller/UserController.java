@@ -30,10 +30,13 @@ import edu.mum.quiz.service.validator.impl.UserValidator;
 
 @SessionAttributes("user")
 @Controller
-public class UserController {
+public class UserController  extends MEMSController  {
 
-	@Autowired
-	private UserService userService;
+	protected UserController() {
+		super("User");
+		// TODO Auto-generated constructor stub
+	}
+
 	@Autowired
 	private ProfileService profileService;
 	@Autowired

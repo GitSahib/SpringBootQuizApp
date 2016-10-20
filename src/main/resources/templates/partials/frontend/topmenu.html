@@ -10,18 +10,20 @@
 				<span class="sr-only">Toggle navigation</span> Menu <i
 					class="fa fa-bars"></i>
 			</button>
-			<a class="navbar-brand page-scroll" href="#page-top">Start
-				Bootstrap</a>
+			<a class="navbar-brand page-scroll" href="#page-top">MUM Exam Management System (MEMS)</a>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav navbar-right">
-				<li><a class="page-scroll" href="#about">About</a></li>
-				<li><a class="page-scroll" href="#services">Services</a></li>
-				<li><a class="page-scroll" href="#portfolio">Portfolio</a></li>
-				<li><a class="page-scroll" href="#contact">Contact</a></li>
+				<li th:if="${title=='Home'}"><a class="page-scroll" href="#about">About</a></li>
+				<li th:unless="${title=='Home'}"><a  href="index">Home</a></li>
+				
+				<li th:class="${title=='exams'?'active':''}" th:if="${user}"><a href="exams">My Exams</a></li>
+				<li th:if="${user!=null && user.hasRole('Admin')}"><a href="admin" >Backend</a></li>
+				<li th:class="${title=='Profile'?'active':''}" th:if="${user}"><a href="profile" th:text="${user.profile.firstName+' - Profile'}">Profile</a></li>
+				<li th:class="${title=='Login'?'active':''}" th:if="${user}"><a href="logout">Logout</a></li>
 			</ul>
 		</div>
 		<!-- /.navbar-collapse -->

@@ -13,16 +13,25 @@ import edu.mum.quiz.service.bl.interfaces.ContactService;
 import edu.mum.quiz.service.validator.impl.ContactValidator;
 
 @Controller
-public class IndexController {
+public class IndexController extends MEMSController {
 	
+	protected IndexController() {
+		super("Home");
+	}
+
 	@Autowired
 	ContactService contactService;
 	@Autowired
 	ContactValidator contactValidator;
-    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/"}, method = RequestMethod.GET)
     public String home(Model model) {
     	
     	return "index";
+    }
+    @RequestMapping(value = {"/index"}, method = RequestMethod.GET)
+    public String index(Model model) {
+    	
+    	return "redirect:/";
     }
     @RequestMapping(value = {"/about"}, method = RequestMethod.GET)
     public String about(Model model) {
@@ -51,6 +60,7 @@ public class IndexController {
     @RequestMapping(value="/*",method=RequestMethod.GET)
     public String error_404(Model model)
     {
+    	model.addAttribute("title","404");
     	return "404";
     }
 }

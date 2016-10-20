@@ -13,8 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.google.common.base.Throwables;
 
 @Controller
-class CustomErrorController {
+class CustomErrorController  extends MEMSController {
 	
+	protected CustomErrorController() {
+		super("Error");
+		// TODO Auto-generated constructor stub
+	}
+
 	@RequestMapping("errorGeneral")
 	public String generalError(HttpServletRequest request, HttpServletResponse response, Model model) {
 		// retrieve some useful information from the request
