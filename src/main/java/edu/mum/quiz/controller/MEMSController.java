@@ -25,7 +25,7 @@ public class MEMSController
 	public void beforeRequest(Model model)
 	{
 		model.addAttribute("title",this.title);
-		model.addAttribute("pageTitle",this.pageTitle);
+		
 		try 
 		{			
 			User user = userService.getLoggedInUser();

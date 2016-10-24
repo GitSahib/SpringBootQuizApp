@@ -39,13 +39,15 @@ public class SubjectController extends MEMSController {
 	public String createQuestion(@ModelAttribute("subject") Subject subject, Model model) {
 
 		setPageTitle("Create Subject");
+		model.addAttribute("pageTitle",getPageTitle());
 		return "admin/subject/create";
 	}
 
 	@RequestMapping(value = { "/subject/create" }, method = RequestMethod.POST)
-	public String createSubject(@ModelAttribute("subject") Subject subject, BindingResult result) {
+	public String createSubject(@ModelAttribute("subject") Subject subject, BindingResult result,Model model) {
 		if (result.hasErrors()) {
 			setPageTitle("Create Subject");
+			model.addAttribute("pageTitle",getPageTitle());
 			return "admin/subject/create";
 		} else {
 			subjectService.save(subject);
@@ -59,6 +61,7 @@ public class SubjectController extends MEMSController {
 		List<Subject> list = subjectService.findAll();
 		model.addAttribute("list", list);
 		setPageTitle("List Subjects");
+		model.addAttribute("pageTitle",getPageTitle());
 		return "admin/subject/list";
 	}
 
@@ -67,6 +70,7 @@ public class SubjectController extends MEMSController {
 		Subject subject = subjectService.findById(id);
 		model.addAttribute("subject", subject);
 		setPageTitle("Subject Details");
+		model.addAttribute("pageTitle",getPageTitle());
 		return "admin/subject/details";
 	}
 

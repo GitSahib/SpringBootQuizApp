@@ -41,14 +41,16 @@ public class QuestionController extends MEMSController {
     public String createQuestion(@ModelAttribute("question") Question question,Model model) {
 		
 		setPageTitle("Create Question");
+		model.addAttribute("pageTitle",getPageTitle());
 		return "admin/question/create";
     }
 	
 	@RequestMapping(value = {"/question/create"}, method = RequestMethod.POST)
-    public String createQuestion(@ModelAttribute("question") Question question,BindingResult result) {
+    public String createQuestion(@ModelAttribute("question") Question question,BindingResult result,Model model) {
     	if(result.hasErrors())
     	{
     		setPageTitle("Create Question");
+    		model.addAttribute("pageTitle",getPageTitle());
     		return "admin/question/create";
     	}
     	else
@@ -63,6 +65,7 @@ public class QuestionController extends MEMSController {
 		List<Question> list = questionService.findAll();
 		model.addAttribute("list",list);
 		setPageTitle("List Questions");
+		model.addAttribute("pageTitle",getPageTitle());
 		return "admin/question/list";
     }
 	@RequestMapping(value = {"/question/details/{id}"}, method = RequestMethod.GET)
@@ -70,6 +73,7 @@ public class QuestionController extends MEMSController {
 		Question question  = questionService.findById(id);
 		model.addAttribute("question",question);
 		setPageTitle("Create Details");
+		model.addAttribute("pageTitle",getPageTitle());
 		return "admin/quesition/details";
     }
 	
