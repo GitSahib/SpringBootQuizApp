@@ -2,14 +2,12 @@ package edu.mum.quiz.domain.quiz;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import edu.mum.quiz.domain.Model;
 
 @Entity
-@Table(name="choices")
 public class Choice extends Model {
 
     /**
@@ -23,7 +21,7 @@ public class Choice extends Model {
 
     @NotNull
     private Boolean correct;
-
+    private int choiceMarks;
     @NotNull
     @ManyToOne
     private Question question;
@@ -68,5 +66,19 @@ public class Choice extends Model {
 	 */
 	public void setQuestion(Question question) {
 		this.question = question;
+	}
+
+	/**
+	 * @return the choiceMarks
+	 */
+	public int getChoiceMarks() {
+		return choiceMarks;
+	}
+
+	/**
+	 * @param choiceMarks the choiceMarks to set
+	 */
+	public void setChoiceMarks(int choiceMarks) {
+		this.choiceMarks = choiceMarks;
 	}
 }

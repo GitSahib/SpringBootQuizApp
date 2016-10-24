@@ -3,14 +3,18 @@ package edu.mum.quiz.domain.quiz;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.ElementCollection;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import edu.mum.quiz.domain.Model;
 
+@Entity
 
-public class Class extends Model{
+public class Subject extends Model{
 
     /**
 	 * 
@@ -18,14 +22,16 @@ public class Class extends Model{
 	private static final long serialVersionUID = 1L;
 
 	@NotNull
-    @Size(max = 80)
+    @Size(max = 200)
     private String name;
-
+	
     @NotNull
     private String mission;
     @NotNull
     private Date startDate;
-
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable
+    private List<Question> questions;
     /**
 	 * @return the name
 	 */
@@ -69,19 +75,18 @@ public class Class extends Model{
 	}
 
 	/**
-	 * @return the students
+	 * @return the Questions
 	 */
-	public List<Student> getStudents() {
-		return students;
+	public List<Question> getQuestions() {
+		return questions;
 	}
 
 	/**
-	 * @param students the students to set
+	 * @param Questions the Questions to set
 	 */
-	public void setStudents(List<Student> students) {
-		this.students = students;
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
 	}
 
-	@ElementCollection
-    private List<Student> students;
+	
 }

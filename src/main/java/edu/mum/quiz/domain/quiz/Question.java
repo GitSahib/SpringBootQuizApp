@@ -9,14 +9,12 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import edu.mum.quiz.domain.Model;
 
 @Entity
-@Table(name="questions")
 public class Question extends Model{
 
     /**
@@ -28,12 +26,29 @@ public class Question extends Model{
     private Quiz quiz;
 	@Enumerated(EnumType.STRING)
 	private QuestionType type;
-    @NotNull
+	@NotNull
     @Size(max = 3000)
     private String text;
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Choice> choices = new HashSet<Choice>();
-    
+    private int totalMarks;
+    @ManyToOne
+    private Subject subject;
+    /**
+	 * @return the subject
+	 */
+	public Subject getSubject() {
+		return subject;
+	}
+
+	/**
+	 * @param subject the subject to set
+	 */
+	public void setSubject(Subject subject) {
+		this.subject = subject;
+	}
+
+	
     //region - Getters And Setters
     /**
 	 * @return the quiz
@@ -97,4 +112,18 @@ public class Question extends Model{
 		this.type = type;
 	}
 	//endregion
+
+	/**
+	 * @return the totalMarks
+	 */
+	public int getTotalMarks() {
+		return totalMarks;
+	}
+
+	/**
+	 * @param totalMarks the totalMarks to set
+	 */
+	public void setTotalMarks(int totalMarks) {
+		this.totalMarks = totalMarks;
+	}
 }

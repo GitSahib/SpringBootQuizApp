@@ -20,7 +20,7 @@
 				<li th:unless="${title=='Home'}"><a  href="index" th:text="#{menu.home}" >Home</a></li>
 				
 				<li th:class="${title=='exams'?'active':''}" th:if="${user}"><a href="exams" th:text="#{menu.exam}">My Exams</a></li>
-				<li th:if="${user!=null && user.hasRole('Admin')}"><a href="admin" th:text="#{menu.backend}">Backend</a></li>
+				<li th:if="${user!=null && user.hasRole('Admin')}"><a href="/admin/" th:text="#{menu.backend}">Backend</a></li>
 				<li th:class="${title=='Profile'?'active':''}" th:if="${user}"><a href="profile" th:text="${user.profile.firstName+' - Profile'}" th:text="#{menu.profile}">Profile</a></li>
 				<li th:class="${title=='Login'?'active':''}" th:if="${user}"><a href="logout" th:text="#{menu.logout}">Logout</a></li>
 				<li class="dropdown">

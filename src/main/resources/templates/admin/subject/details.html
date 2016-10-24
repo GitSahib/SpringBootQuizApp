@@ -2,7 +2,6 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <div th:replace="partials/backend/head::head">&nbsp;</div>
-
 <body class="nav-md">
 	<div class="container body">
 		<div class="main_container">
@@ -11,12 +10,30 @@
 			<div th:replace="partials/backend/topmenu::topmenu">&nbsp;</div>
 
 			<!-- page content -->
-			<div class="right_col" role="main">Main Content goes here</div>
+			<div class="right_col" role="main">
+				<div class="">
+					<div th:replace="partials/backend/pagetitle::pagetitle"></div>
+					<p>
+						Id:<span th:text="${subject.id}"></span>
+					</p>
+					<p>
+						Mission:<span th:text="${subject.mission}"></span>
+					</p>
+					<p>
+						Name:<span th:text="${subject.name}"></span>
+					</p>
+					<p>
+						Start Date:<span th:text="${subject.startDate}"></span>
+					</p>
+				</div>
+			</div>
 			<!-- /page content -->
 
 			<div th:replace="partials/backend/footer::footer">&nbsp;</div>
 		</div>
 	</div>
 	<div th:replace="partials/backend/jscripts::jscripts">&nbsp;</div>
+
+
 </body>
 </html>

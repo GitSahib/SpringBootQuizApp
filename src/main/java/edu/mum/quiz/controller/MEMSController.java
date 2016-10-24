@@ -11,7 +11,7 @@ public class MEMSController
 	@Autowired
 	protected UserService userService;
 	private String title;
-	
+	private String pageTitle;
 	protected MEMSController(String title)
 	{
 		this.setTitle(title);
@@ -25,6 +25,7 @@ public class MEMSController
 	public void beforeRequest(Model model)
 	{
 		model.addAttribute("title",this.title);
+		model.addAttribute("pageTitle",this.pageTitle);
 		try 
 		{			
 			User user = userService.getLoggedInUser();
@@ -35,5 +36,17 @@ public class MEMSController
 		{
 			
 		}
+	}
+	/**
+	 * @return the pageTitle
+	 */
+	public String getPageTitle() {
+		return pageTitle;
+	}
+	/**
+	 * @param pageTitle the pageTitle to set
+	 */
+	public void setPageTitle(String pageTitle) {
+		this.pageTitle = pageTitle;
 	}
 }
