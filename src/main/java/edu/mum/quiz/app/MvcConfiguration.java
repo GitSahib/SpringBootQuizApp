@@ -21,7 +21,6 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 import edu.mum.quiz.app.aop.ExecuteTimeInterceptor;
-import edu.mum.quiz.app.aop.MaintenanceInterceptor;
 
 @Configuration
 @EnableAutoConfiguration
@@ -50,14 +49,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 		return validator;
 	}
 	
-	@Bean
-	public MaintenanceInterceptor maintenanceInterceptor() {
-		MaintenanceInterceptor interceptor = new MaintenanceInterceptor();
-		interceptor.setMaintenanceStartTime(12);
-		interceptor.setMaintenanceEndTime(13);
-		interceptor.setMaintenanceMapping("maintenance");
-		return interceptor;
-	}
+	
 	@Bean
 	public ExecuteTimeInterceptor executeTimeInterceptor() {
 		ExecuteTimeInterceptor interceptor = new ExecuteTimeInterceptor();
@@ -77,7 +69,7 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 		interceptor.setParamName("lang");
 		registry.addInterceptor(interceptor);
 		registry.addInterceptor(executeTimeInterceptor());
-		registry.addInterceptor(maintenanceInterceptor());
+		
 	}
 	
 

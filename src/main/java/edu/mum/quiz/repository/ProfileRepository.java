@@ -9,6 +9,4 @@ import edu.mum.quiz.domain.User;
 public interface ProfileRepository extends JpaRepository<Profile, Long> {
     Profile findByFirstName(String FirstName);
     Profile findByUser(User user);
-    
-	
 }

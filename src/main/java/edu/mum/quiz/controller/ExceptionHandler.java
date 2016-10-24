@@ -3,6 +3,7 @@ package edu.mum.quiz.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.google.common.base.Throwables;
 @EnableWebMvc
+@Component
 @ControllerAdvice
 class ExceptionHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger("ErrorLog");

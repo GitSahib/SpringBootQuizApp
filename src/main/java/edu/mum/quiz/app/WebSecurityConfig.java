@@ -43,9 +43,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.and()
 		.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login");
         http.rememberMe(). 
-        key("rem-me-key").
+        key("loginkeeping").
         rememberMeParameter("loginkeeping").
-        rememberMeCookieName("my-remember-me").
+        rememberMeCookieName("loginkeeping").
         tokenValiditySeconds(86400);
        
     }

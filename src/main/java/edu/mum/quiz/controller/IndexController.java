@@ -23,31 +23,41 @@ public class IndexController extends MEMSController {
 	ContactService contactService;
 	@Autowired
 	ContactValidator contactValidator;
-    @RequestMapping(value = {"/"}, method = RequestMethod.GET)
-    public String home(Model model) {
-    	
+    
+	@RequestMapping(value = {"/"}, method = RequestMethod.GET)
+    public String home(Model model) {    	
     	return "index";
     }
+    
     @RequestMapping(value = {"/index"}, method = RequestMethod.GET)
-    public String index(Model model) {
-    	
+    public String index(Model model) {    	
     	return "redirect:/";
     }
+    
     @RequestMapping(value = {"/about"}, method = RequestMethod.GET)
     public String about(Model model) {
           return "about";
     }
+    
+    @RequestMapping(value = {"/maintenance"}, method = RequestMethod.GET)
+    public String maintenance(Model model) {
+          return "maintenance";
+    }
+    
     @RequestMapping(value = {"/error-custom"}, method = RequestMethod.GET)
     public String error(Model model) {
           return "error";
     }
+    
     @RequestMapping(value = {"/contact", "/contact.html","contact.jsp"}, method = RequestMethod.GET)
-    public String contact(Model model) {
-    	model.addAttribute("contactForm", new Contact()); 
+    public String contact(@ModelAttribute("contactForm") Contact contactForm) {
     	return "contact";
     }
+    
     @RequestMapping(value = "/contact", method = RequestMethod.POST)
-	public String register(@ModelAttribute("contactForm") Contact contactForm, BindingResult bindingResult, Model model) {
+	public String register(@ModelAttribute("contactForm") Contact contactForm, 
+			BindingResult bindingResult, Model model) {
+    	
     	contactValidator.validate(contactForm, bindingResult);
 		if (bindingResult.hasErrors()) {
 			return "contact";
@@ -55,6 +65,7 @@ public class IndexController extends MEMSController {
     	contactService.save(contactForm);
     	model.addAttribute("message","Thank you for contacting we will soon contact you");
     	return "contact";
+    	
     }
    
     @RequestMapping(value="/*",method=RequestMethod.GET)

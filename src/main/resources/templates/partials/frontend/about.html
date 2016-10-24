@@ -4,14 +4,13 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2 text-center">
-				<h2 class="section-heading">We've got what you need!</h2>
+				<h2 class="section-heading" th:text="#{about.heading.top}">We've got what you need!</h2>
 				<hr class="light">
-				<p class="text-faded">
+				<p class="text-faded" th:text="#{about.heading}">
 					MEMS has everything you need for conducting exam and evoluating your students.
 				    Students can also take advantage of taking different exercises and question and know about thier
-				    strengths and weaknesses. Start Bootstrap has everything you need to
-					get your new website up and running in no time!</p>
-				<a href="login#toregister"	class="page-scroll btn btn-default btn-xl sr-button">Get
+				    strengths and weaknesses!</p>
+				<a href="login#toregister"	class="page-scroll btn btn-default btn-xl sr-button" th:text="#{button.getting.started}">Get
 					Started!</a>
 			</div>
 		</div>

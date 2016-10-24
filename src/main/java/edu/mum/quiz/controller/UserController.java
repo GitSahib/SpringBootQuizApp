@@ -25,7 +25,6 @@ import edu.mum.quiz.domain.User;
 import edu.mum.quiz.service.security.interfaces.ProfileService;
 import edu.mum.quiz.service.security.interfaces.RoleService;
 import edu.mum.quiz.service.security.interfaces.SecurityService;
-import edu.mum.quiz.service.security.interfaces.UserService;
 import edu.mum.quiz.service.validator.impl.UserValidator;
 
 @SessionAttributes("user")
