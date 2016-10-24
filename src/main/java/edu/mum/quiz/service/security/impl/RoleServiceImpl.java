@@ -1,5 +1,7 @@
 package edu.mum.quiz.service.security.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,5 +27,11 @@ public class RoleServiceImpl implements RoleService {
 	public void save(Role role) {
 		// TODO Auto-generated method stub
 		roleRepository.save(role);
+	}
+
+	@Override
+	public List<Role> findAll() {
+		// TODO Auto-generated method stub
+		return roleRepository.findAll();
 	}
 }
