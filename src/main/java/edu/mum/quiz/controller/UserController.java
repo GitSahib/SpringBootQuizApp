@@ -87,7 +87,7 @@ public class UserController  extends MEMSController  {
 		
 		profile.setUser(userForm);
 		profileService.save(profile);		
-		securityService.autologin(userForm.getUsername(), userForm.getPassword());
+		securityService.autologin(userForm.getUsername(), userForm.getPasswordConfirm());
 		return "redirect:/index";
 	}
 
