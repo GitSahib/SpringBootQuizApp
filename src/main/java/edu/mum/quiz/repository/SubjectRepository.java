@@ -1,5 +1,4 @@
 package edu.mum.quiz.repository;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,5 +14,4 @@ public interface SubjectRepository extends JpaRepository<Subject, Long>{
 	Subject findById(Long Id);
 	void delete(Subject Subject);
 	List<Subject> findByMission(String mission);
-	List<Subject> findByStartDate(Date date);
 }

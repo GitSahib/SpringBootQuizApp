@@ -1,7 +1,6 @@
 package edu.mum.quiz.service.bl.impl;
 
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,13 +45,7 @@ public class SubjectServiceImpl implements SubjectService{
 	@Override
 	public void delete(Subject Subject) {
 		// TODO Auto-generated method stub
-		subjectDao.save(Subject);
-	}
-
-	@Override
-	public List<Subject> findByStartDate(Date date) {
-		// TODO Auto-generated method stub
-		return subjectDao.findByStartDate(date);
+		subjectDao.delete(Subject);
 	}
 
 	@Override

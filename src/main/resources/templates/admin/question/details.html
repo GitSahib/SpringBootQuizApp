@@ -15,16 +15,24 @@
 				<div class="">
 					<div th:replace="partials/backend/pagetitle::pagetitle"></div>
 					<p>
-						Id:<span th:text="${subject.id}"></span>
+						Id:<span th:text="${question.id}"></span>
 					</p>
 					<p>
-						Mission:<span th:text="${subject.mission}"></span>
+						Text:<span th:text="${question.text}"></span>
 					</p>
 					<p>
-						Name:<span th:text="${subject.name}"></span>
+						Subject:<span th:text="${question.subject.name}"></span>
 					</p>
 					<p>
-						Start Date:<span th:text="${subject.startDate}"></span>
+						Type:<span th:text="${question.type}"></span>
+					</p>
+					<p>Choices:
+						<ul>
+						<li th:each="choice,iterationStatus  : ${question.choices}">
+							<span th:text="${iterationStatus.count+'.'}">1</span>
+							<span th:text="${choice.text}"></span>
+						</li>
+						</ul>
 					</p>
 				</div>
 			</div>

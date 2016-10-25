@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -32,9 +34,10 @@ public class Quiz extends Model{
 	@NotNull
 	@Size(max = 500)
 	private String description;
-	
+	@Temporal(TemporalType.TIMESTAMP)
 	@NotNull
 	Date startTime;
+	@Temporal(TemporalType.TIMESTAMP)
 	@NotNull
 	Date endTime;
 	/* (non-Javadoc)

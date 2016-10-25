@@ -1,16 +1,11 @@
 package edu.mum.quiz.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import edu.mum.quiz.domain.quiz.Subject;
 import edu.mum.quiz.service.bl.interfaces.SubjectService;
+import javassist.NotFoundException;
 
 @Controller
 @RequestMapping("/admin")
@@ -29,14 +25,9 @@ public class SubjectController extends MEMSController {
 		super("Subjects");
 	}
 	// Subject Routes
-	@InitBinder
-	protected void initBinder(WebDataBinder binder) {
-	    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-	    binder.registerCustomEditor(Date.class, new CustomDateEditor(
-	            dateFormat, false));
-	}
+	
 	@RequestMapping(value = { "/subject/create" }, method = RequestMethod.GET)
-	public String createQuestion(@ModelAttribute("subject") Subject subject, Model model) {
+	public String createSubject(@ModelAttribute("subject") Subject subject, Model model) {
 
 		setPageTitle("Create Subject");
 		model.addAttribute("pageTitle",getPageTitle());
@@ -56,8 +47,8 @@ public class SubjectController extends MEMSController {
 
 	}
 
-	@RequestMapping(value = { "/subject/list" }, method = RequestMethod.GET)
-	public String listQuestion(Model model) {
+	@RequestMapping(value = { "/subject/list","/subject" }, method = RequestMethod.GET)
+	public String listSubject(Model model) {
 		List<Subject> list = subjectService.findAll();
 		model.addAttribute("list", list);
 		setPageTitle("List Subjects");
@@ -72,6 +63,43 @@ public class SubjectController extends MEMSController {
 		setPageTitle("Subject Details");
 		model.addAttribute("pageTitle",getPageTitle());
 		return "admin/subject/details";
+	}
+	
+	@RequestMapping(value = { "/subject/edit/{id}" }, method = RequestMethod.GET)
+	public String editSubject(@PathVariable("id") Long id, Model model) throws NotFoundException {
+
+		setPageTitle("Edit Subject");
+		model.addAttribute("pageTitle",getPageTitle());
+		Subject subject = subjectService.findById(id);
+		if(subject == null)
+		{
+			throw new NotFoundException("Subject with id:"+id+" Not Found");
+		}
+		model.addAttribute("subject",subject);
+		return "admin/subject/edit";
+	}
+	@RequestMapping(value = { "/subject/delete/{id}" }, method = RequestMethod.GET)
+	public String deleteSubject(@PathVariable("id") Long id, Model model) throws NotFoundException {
+
+		Subject subject = subjectService.findById(id);
+		if(subject == null)
+		{
+			throw new NotFoundException("Subject with id:"+id+" Not Found");
+		}
+		subjectService.delete(subject);
+		return "redirect:/admin/subject/list";
+	}
+	@RequestMapping(value = { "/subject/edit" }, method = RequestMethod.POST)
+	public String editSubject(@ModelAttribute("subject") Subject subject, BindingResult result,Model model) {
+		if (result.hasErrors()) {
+			setPageTitle("Edit Subject");
+			model.addAttribute("pageTitle",getPageTitle());
+			return "admin/subject/edit";
+		} else {
+			subjectService.save(subject);
+			return "redirect:/admin/subject/details/" + subject.getId();
+		}
+
 	}
 
 }

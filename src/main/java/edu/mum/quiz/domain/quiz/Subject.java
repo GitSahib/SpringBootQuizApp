@@ -1,6 +1,5 @@
 package edu.mum.quiz.domain.quiz;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -27,8 +26,6 @@ public class Subject extends Model{
 	
     @NotNull
     private String mission;
-    @NotNull
-    private Date startDate;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable
     private List<Question> questions;
@@ -60,19 +57,7 @@ public class Subject extends Model{
 		this.mission = mission;
 	}
 
-	/**
-	 * @return the startDate
-	 */
-	public Date getStartDate() {
-		return startDate;
-	}
-
-	/**
-	 * @param startDate the startDate to set
-	 */
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
+	
 
 	/**
 	 * @return the Questions
