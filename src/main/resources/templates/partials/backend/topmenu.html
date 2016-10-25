@@ -11,7 +11,7 @@
 				<li class=""><a href="javascript:;"
 					class="user-profile dropdown-toggle" data-toggle="dropdown"
 					aria-expanded="false"> <img
-						th:src="${user.profile.image != '' ?'data:image/jpeg;base64,'+user.profile.image:'users/userimages/avatar.png'}"
+						th:src="${user.profile.image != '' ?'data:image/jpeg;base64,'+user.profile.image:'/users/userimages/avatar.png'}"
 						th:alt="${user.profile.image != '' ?user.profile.firstName:'avatar'}"> <span th:text="${user.profile.firstName}"></span> <span
 						class=" fa fa-angle-down"></span>
 				</a>
