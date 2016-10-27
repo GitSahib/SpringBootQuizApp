@@ -106,7 +106,7 @@ public class QuestionController extends MEMSController {
 			model.addAttribute("pageTitle",getPageTitle());
 			return "admin/question/edit";
 		} else {
-			questionService.save(question);
+			questionService.update(question);
 			return "redirect:/admin/question/details/" + question.getId();
 		}
 

@@ -21,6 +21,8 @@ public class Profile extends Model {
 	private String firstName;
     private String lastName;
     private String phoneNumber;
+    private int studentId;
+    private String entry;
     @Lob
     private byte[] image;
     @OneToOne
@@ -101,6 +103,32 @@ public class Profile extends Model {
 	 */
 	public void setImage(byte[] image) {
 		this.image = image;
+	}
+	
+	
+	/**
+	 * @return the entry
+	 */
+	public String getEntry() {
+		return entry;
+	}
+	/**
+	 * @param entry the entry to set
+	 */
+	public void setEntry(String entry) {
+		this.entry = entry;
+	}
+	/**
+	 * @return the studentId
+	 */
+	public int getStudentId() {
+		return studentId;
+	}
+	/**
+	 * @param studentId the studentId to set
+	 */
+	public void setStudentId(int studentId) {
+		this.studentId = studentId;
 	}
    
 	//endregion

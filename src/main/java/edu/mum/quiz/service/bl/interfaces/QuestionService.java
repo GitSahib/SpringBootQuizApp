@@ -14,5 +14,6 @@ public interface QuestionService
 	List<Question> findBySubject(Subject subject);
 	void delete(Question question);
 	List<Question> findAll();
+	Question update(Question question);
 
 }

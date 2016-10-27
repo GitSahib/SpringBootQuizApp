@@ -44,12 +44,25 @@ public class QuestionServiceImpl implements QuestionService{
 	
 	@Override
 	public Question save(Question question) {
+		
 		Question q =  questionDao.save(question);
 		for(Choice choice:question.getChoices())
 		{
 			choice.setQuestion(q);
 			choiceDao.save(choice);
 		}
+		return q;
+	
+	}
+	@Override
+	public Question update(Question question) {		
+		
+		for(Choice choice:question.getChoices())
+		{
+			choice.setQuestion(question);
+			choiceDao.save(choice);
+		}
+		Question q =  questionDao.save(question);
 		return q;
 	
 	}

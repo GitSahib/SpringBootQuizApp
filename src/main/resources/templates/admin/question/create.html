@@ -57,28 +57,7 @@
 												</select> 
 											</div>
 										</div>
-										<div id="choices" class="item form-group" th:if="${question.choices.size() > 0 }">
-											<div class='choice_row' th:each="choice,status: ${question.choices}">
-												<div class="col-md-4">
-													<label>Choice</label>
-													<input type="text" class="form-control" th:name="${'choices['+status.index+'].text'}"
-													th:value="${choice.text}" />
-												</div>
-												<div class="col-md-4">
-													<label>Answer</label>
-													<select th:name="${'choices['+status.index+'].correct'}">
-														<option value="yes">Yes</option>
-														<option value="no">No</option>
-													</select>
-												</div>
-												<div class="col-md-4">
-													<label>Marks</label>
-													<input type="text" class="form-control" th:name="${'choices['+status.index+'].choiceMarks'}"
-													th:value="${choice.choiceMarks}" />
-												</div>
-											</div>				
-											
-										</div>
+										
 										<div id="choices" th:unless="${question.choices.size() > 0 }">
 										
 										</div>

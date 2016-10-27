@@ -1,5 +1,7 @@
 package edu.mum.quiz.service.security.interfaces;
 
+import java.util.List;
+
 import edu.mum.quiz.domain.User;
 
 public interface UserService {
@@ -19,4 +21,8 @@ public interface UserService {
 	boolean authenticate(String password);
 
 	User getLoggedInUser();
+
+	List<User> findAll();
+
+	User findById(Long id);
 }

@@ -9,6 +9,10 @@ import org.springframework.stereotype.Repository;
 import edu.mum.quiz.domain.quiz.Question;
 import edu.mum.quiz.domain.quiz.QuestionType;
 import edu.mum.quiz.domain.quiz.Subject;
+/**
+ * @author sahib
+ *
+ */
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Long>{
 	@Query("From Question q where q.text like %:word%")
@@ -18,4 +22,7 @@ public interface QuestionRepository extends JpaRepository<Question, Long>{
 	List<Question> findBySubject(Subject subject);
 	void delete(Question question);
 	List<Question> findByType(QuestionType type);
+	@Query("From Question q Where q.subject=?1 And q.type=?2")
+	List<Question> findRandomQuestionBySubejctAndType(Subject subject,
+			QuestionType type);
 }

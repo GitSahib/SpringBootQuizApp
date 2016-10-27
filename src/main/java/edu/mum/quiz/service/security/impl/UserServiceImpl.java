@@ -1,5 +1,7 @@
 package edu.mum.quiz.service.security.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -100,5 +102,17 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findByUsername(String username) {
 		return userRepository.findByUsername(username);
+	}
+
+	@Override
+	public List<User> findAll() {
+		// TODO Auto-generated method stub
+		return userRepository.findAll();
+	}
+
+	@Override
+	public User findById(Long id) {
+		// TODO Auto-generated method stub
+		return userRepository.findOne(id);
 	}
 }

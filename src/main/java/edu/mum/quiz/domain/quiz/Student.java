@@ -1,47 +1,98 @@
 package edu.mum.quiz.domain.quiz;
 
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import edu.mum.quiz.domain.Model;
-
+import edu.mum.quiz.domain.User;
+@Entity
 public class Student extends Model {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	@NotNull
-	@Size(max = 40)
-	private String name;
-	@NotNull
-	private String ID;
-	@NotNull
-	private String email;
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
+	@OneToMany
+	@JoinTable
+	private List<User> teacher;
+	@OneToMany
+	@JoinTable
+	private List<Subject> subject;
+	@OneToOne
+	Student student;
+	/**
+	 * @return the student
 	 */
-	@Override
-	public String toString() {
-		return "Student [name=" + name + "]";
+	public Student getStudent() {
+		return student;
 	}
 	/**
-	 * @return the name
+	 * @param student the student to set
 	 */
-	public String getName() {
-		return name;
+	public void setStudent(Student student) {
+		this.student = student;
+	}
+	@Temporal(TemporalType.DATE)
+	@NotNull
+	Date startDate;
+	@Temporal(TemporalType.DATE)
+	@NotNull
+	Date endDate;
+	/**
+	 * @return the teacher
+	 */
+	public List<User> getTeacher() {
+		return teacher;
 	}
 	/**
-	 * @param name the name to set
+	 * @param teacher the teacher to set
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setTeacher(List<User> teacher) {
+		this.teacher = teacher;
 	}
 	/**
-	 * @return the serialversionuid
+	 * @return the subject
 	 */
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public List<Subject> getSubject() {
+		return subject;
 	}
-
+	/**
+	 * @param subject the subject to set
+	 */
+	public void setSubject(List<Subject> subject) {
+		this.subject = subject;
+	}
+	/**
+	 * @return the startDate
+	 */
+	public Date getStartDate() {
+		return startDate;
+	}
+	/**
+	 * @param startDate the startDate to set
+	 */
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+	/**
+	 * @return the endDate
+	 */
+	public Date getEndDate() {
+		return endDate;
+	}
+	/**
+	 * @param endDate the endDate to set
+	 */
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+	
 }
