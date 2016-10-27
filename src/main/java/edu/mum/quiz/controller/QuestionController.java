@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import edu.mum.quiz.domain.quiz.Question;
+import edu.mum.quiz.domain.quiz.QuestionType;
 import edu.mum.quiz.domain.quiz.Subject;
 import edu.mum.quiz.service.bl.interfaces.QuestionService;
 import edu.mum.quiz.service.bl.interfaces.SubjectService;
@@ -30,7 +31,7 @@ public class QuestionController extends MEMSController {
 	@ModelAttribute
 	public void setTypesAndQuestions(Model model)
 	{
-		//model.addAttribute("types", QuestionType.getNames());
+		model.addAttribute("types", QuestionType.getNames());
 		List<Subject> subjects = subjectService.findAll();
 		model.addAttribute("subjects",subjects);
 	}
