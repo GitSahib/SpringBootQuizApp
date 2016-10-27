@@ -14,13 +14,15 @@
 				<div class="">
 					<div th:replace="partials/backend/pagetitle::pagetitle">&nbsp;</div>
 					<h2 th:text="#{heading.id}">Id:</h2>
+					
 					<span th:text="${question.id}"></span>
+					<h2 th:text="#{heading.question.text}">Question Text:</h2>
+					<span th:utext="${question.text}"></span>
 
 					<h2 th:text="#{heading.time.created}">Time Created:</h2>
 					<span th:text="${question.updatedTime}"></span>
 
-					<h2 th:text="#{heading.question.text}">Question Text:</h2>
-					<span th:utext="${question.text}"></span>
+					
 					<h2 th:text="#{heading.question.type}">Question Type:</h2>
 					<span th:text="${question.type}"></span>
 					<h2 th:text="#{heading.subject}">Question Subject:</h2>

@@ -23,12 +23,13 @@ public abstract class Model implements Serializable{
 	protected Long id;
 	@Column(columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	protected Date updatedTime;
-	protected Date getUpdatedTime() {
+	public Date getUpdatedTime() {
 		return updatedTime;
 	}
 	public void setUpdatedTime(Date updatedTime) {
 		this.updatedTime = updatedTime;
 	}
+	
 	public Long getId() {
         return id;
     }
