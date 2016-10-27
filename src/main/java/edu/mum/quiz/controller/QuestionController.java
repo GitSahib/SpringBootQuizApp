@@ -1,6 +1,6 @@
 package edu.mum.quiz.controller;
 
-import java.util.ArrayList;
+import java.rmi.NoSuchObjectException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,28 +13,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import edu.mum.quiz.domain.quiz.Question;
-import edu.mum.quiz.domain.quiz.QuestionType;
 import edu.mum.quiz.domain.quiz.Subject;
 import edu.mum.quiz.service.bl.interfaces.QuestionService;
+import edu.mum.quiz.service.bl.interfaces.SubjectService;
 
 @Controller
 @RequestMapping("/admin")
 public class QuestionController extends MEMSController {
 	@Autowired 
 	QuestionService questionService;
+	@Autowired 
+	SubjectService subjectService;
 	protected QuestionController() {
 		super("Questions");
 	}
 	@ModelAttribute
-	public void setTypesAndSubjects(Model model)
+	public void setTypesAndQuestions(Model model)
 	{
-		model.addAttribute("types", QuestionType.getNames());
-		//List<Subject> subjects = subjectService.findAll();
-		List<Subject> subjects = new ArrayList<Subject>();
-		Subject subject = new Subject();
-		subject.setName("WAP");
-		subject.setId((long) 1);
-		subjects.add(subject);
+		//model.addAttribute("types", QuestionType.getNames());
+		List<Subject> subjects = subjectService.findAll();
 		model.addAttribute("subjects",subjects);
 	}
 	@RequestMapping(value = {"/question/create"}, method = RequestMethod.GET)
@@ -74,8 +71,44 @@ public class QuestionController extends MEMSController {
 		model.addAttribute("question",question);
 		setPageTitle("Create Details");
 		model.addAttribute("pageTitle",getPageTitle());
-		return "admin/quesition/details";
+		return "admin/question/details";
     }
 	
+	@RequestMapping(value = { "/question/edit/{id}" }, method = RequestMethod.GET)
+	public String editQuestion(@PathVariable("id") Long id, Model model) throws NoSuchObjectException {
+
+		setPageTitle("Edit Question");
+		model.addAttribute("pageTitle",getPageTitle());
+		Question question = questionService.findById(id);
+		if(question == null)
+		{
+			throw new NoSuchObjectException("Question with id:"+id+" Not Found");
+		}
+		model.addAttribute("question",question);
+		return "admin/question/edit";
+	}
+	@RequestMapping(value = { "/question/delete/{id}" }, method = RequestMethod.GET)
+	public String deleteQuestion(@PathVariable("id") Long id, Model model) throws NoSuchObjectException {
+
+		Question question = questionService.findById(id);
+		if(question == null)
+		{
+			throw new NoSuchObjectException("Question with id:"+id+" Not Found");
+		}
+		questionService.delete(question);
+		return "redirect:/admin/question/list";
+	}
+	@RequestMapping(value = { "/question/edit" }, method = RequestMethod.POST)
+	public String editQuestion(@ModelAttribute("question") Question question, BindingResult result,Model model) {
+		if (result.hasErrors()) {
+			setPageTitle("Edit Question");
+			model.addAttribute("pageTitle",getPageTitle());
+			return "admin/question/edit";
+		} else {
+			questionService.save(question);
+			return "redirect:/admin/question/details/" + question.getId();
+		}
+
+	}
 
 }

@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public enum QuestionType {
 	MULTIPLE_CHOICE,
-	TURE_FALSE,
+	TRUE_FALSE,
 	FILL_BLANK,
 	SHORT_QUESTION,
 	LONG_QUESTION;

@@ -1,6 +1,8 @@
 package edu.mum.quiz.domain.quiz;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -29,8 +31,8 @@ public class Question extends Model{
 	@NotNull
     @Size(max = 3000)
     private String text;
-    @OneToMany(cascade = CascadeType.ALL)
-    private Set<Choice> choices = new HashSet<Choice>();
+    @OneToMany
+    private List<Choice> choices = new ArrayList<Choice>();
     private int totalMarks;
     @ManyToOne
     private Subject subject;
@@ -81,14 +83,14 @@ public class Question extends Model{
 	/**
 	 * @return the choices
 	 */
-	public Set<Choice> getChoices() {
+	public List<Choice> getChoices() {
 		return choices;
 	}
 
 	/**
 	 * @param choices the choices to set
 	 */
-	public void setChoices(Set<Choice> choices) {
+	public void setChoices(List<Choice> choices) {
 		this.choices = choices;
 	}
 
